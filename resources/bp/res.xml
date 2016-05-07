@@ -27,6 +27,8 @@
         <field num="4" type="AMOUNT"/>
         <!-- transmission datetime -->
         <field num="7" type="DATE10"/>
+        <!-- systems trace audit number -->
+        <field num="11" type="NUMERIC" length="6"/>
         <!-- settlement date -->
         <field num="15" type="DATE4"/>
         <!-- mcc -->
@@ -59,7 +61,7 @@
     </parse>
 
     <!-- authorization advice -->
-    <parse type="230">
+    <parse type="0230">
         <!-- PAN -->
         <field num="2" type="NUMERIC" length="16"/>
         <!-- processing code -->
@@ -68,6 +70,8 @@
         <field num="4" type="AMOUNT"/>
         <!-- transmission datetime -->
         <field num="7" type="DATE10"/>
+        <!-- systems trace audit number -->
+        <field num="11" type="NUMERIC" length="6"/>
         <!-- settlement date -->
         <field num="15" type="DATE4"/>
         <!-- mcc -->
@@ -95,6 +99,50 @@
         <field num="49" type="NUMERIC" length="3"/>
         <!-- national product information -->
         <field num="57" type="LLLVAR"/>
+    </parse>
+
+    <!-- reversal request -->
+    <!-- response -->
+    <parse type="0430">
+         <!-- PAN -->
+        <field num="2" type="NUMERIC" length="16"/>
+        <!-- processing code -->
+        <field num="3" type="NUMERIC" length="6"/>
+        <!-- amount -->
+        <field num="4" type="AMOUNT"/>
+        <!-- transmission datetime -->
+        <field num="7" type="DATE10"/>
+        <!-- systems trace audit number -->
+        <field num="11" type="NUMERIC" length="6"/>
+        <!-- settlement date -->
+        <field num="15" type="DATE4"/>
+        <!-- mcc -->
+        <field num="18" type="NUMERIC" length="4"/>
+        <!-- acquiring institution identification code -->
+        <field num="32" type="LLVAR"/>
+        <!--forwarding institution identification code -->
+        <field num="33" type="LLVAR"/>
+         <!-- reference number -->
+        <field num="37" type="ALPHA" length="12"/>
+        <!-- authorization identification response -->
+        <field num="38" type="ALPHA" length="6"/>
+        <!-- response code -->
+        <field num="39" type="ALPHA" length="2"/>
+        <!-- card acceptor terminal id -->
+        <field num="41" type="ALPHA" length="16"/>
+        <!-- card acceptor identification code -->
+        <field num="42" type="ALPHA" length="15"/>
+        <!-- card acceptor name and location -->
+        <!-- (1-23 address 24-36 city 37-38 state 39-40 country) -->
+        <field num="43" type="ALPHA" length="40"/>
+        <!-- additional customized data -->
+        <field num="48" type="LLLVAR"/>
+        <!-- currency -->
+        <field num="49" type="NUMERIC" length="3"/>
+        <!-- national product information -->
+        <field num="57" type="LLLVAR"/>
+        <!-- network data -->
+        <field num="63" type="LLLVAR"/>
     </parse>
 
 </j8583-config>
