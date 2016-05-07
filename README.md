@@ -1,6 +1,6 @@
 # iso-gtw
 
-FIXME
+__iso-gtw__ is an ISO 8583 gateway for the internet era. It connects to any ISO 8583 host and allows you to send and receive messages over HTTP and JSON.
 
 ## Getting Started
 
@@ -20,5 +20,7 @@ To configure logging see config/logback.xml. By default, the app logs to stdout 
 To learn more about configuring Logback, read its [documentation](http://logback.qos.ch/documentation.html).
 
 ## Links
-* [Other examples](https://github.com/pedestal/samples)
-
+* [About ISO 8583](https://en.wikipedia.org/wiki/ISO_8583)
+* [j8583](http://j8583.sourceforge.net/)
+* [JReactive-8583](https://github.com/kpavlov/jreactive-8583)
+* [Pedestal](https://github.com/pedestal/pedestal)
