@@ -145,4 +145,8 @@
         <field num="63" type="LLLVAR"/>
     </parse>
 
+    <!-- void request -->
+    <!-- response -->
+    <parse type="0410" ref="0430"/>
+
 </j8583-config>
