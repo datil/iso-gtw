@@ -23,7 +23,7 @@
                   true)
                 (onMessage [this ctx iso-msg]
                   (println "server response code: "
-                           (.getField iso-msg 39))
+                           (.debugString iso-msg))
                   true)))
 
 (.addMessageListener client mti-0810)
