@@ -12,6 +12,7 @@
 
 (.setCharacterEncoding msg-factory (.name StandardCharsets/US_ASCII))
 (.setUseBinaryMessages msg-factory true)
+(.setUseBinaryBitmap msg-factory true)
 
 (def client (new Iso8583Client msg-factory))
 
