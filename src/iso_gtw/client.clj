@@ -51,7 +51,7 @@
   []
   (let [iso-msg (.newMessage msg-factory 0x020)]
     (doto iso-msg
-      (.setField 2 (.value IsoType/ALPHA "165555555555554444" 18))
+      (.setField 2 (.value IsoType/LLVAR "5555555555554444"))
       (.setField 3 (.value IsoType/ALPHA "003000" 6))
       (.setField 4 (.value IsoType/ALPHA "000000001000" 12))
       (.setField 7 (.value IsoType/DATE10 "0509095721"))
@@ -62,18 +62,18 @@
       (.setField 15 (.value IsoType/ALPHA "0509" 4))
       (.setField 18 (.value IsoType/ALPHA "7832" 4))
       (.setField 22 (.value IsoType/ALPHA "012" 3))
-      (.setField 32 (.value IsoType/ALPHA "06921802" 8))
-      (.setField 33 (.value IsoType/ALPHA "06921802" 8))
+      (.setField 32 (.value IsoType/LLVAR "921802"))
+      (.setField 33 (.value IsoType/LLVAR "921802"))
       (.setField 37 (.value IsoType/ALPHA "621010000999" 12))
       (.setField 41 (.value IsoType/ALPHA "APP66699" 8))
       (.setField 42 (.value IsoType/ALPHA "1000000209     " 15))
       (.setField 43 (.value IsoType/ALPHA "DATILMEDIA PACIFICARD   Gy           ECU" 40))
-      (.setField 48 (.value IsoType/ALPHA "0089203683" 10))
+      (.setField 48 (.value IsoType/LLLVAR "9203683"))
       (.setField 49 (.value IsoType/ALPHA "840" 3))
-      (.setField 54 (.value IsoType/ALPHA "0161112000000000000" 19))
-      (.setField 57 (.value IsoType/ALPHA "00800003000" 11))
-      (.setField 58 (.value IsoType/ALPHA "024220100000000000000000000" 27))
-      (.setField 61 (.value IsoType/ALPHA "02610250000006002180000000000" 29)))))
+      (.setField 54 (.value IsoType/LLLVAR "1112000000000000"))
+      (.setField 57 (.value IsoType/LLLVAR "00003000"))
+      (.setField 58 (.value IsoType/LLLVAR "220100000000000000000000"))
+      (.setField 61 (.value IsoType/LLLVAR "10250000006002180000000000")))))
 
 (defn connect
   [client host port]
