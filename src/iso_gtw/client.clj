@@ -26,7 +26,7 @@
 
 (def mti-0210 (reify IsoMessageListener
                 (applies [this iso-msg]
-                  (= (.getType iso-gtw) 0x210))
+                  (= (.getType iso-msg) 0x210))
                 (onMessage [this ctx iso-msg]
                   (println "210 received: "
                            (.debugString iso-msg))
