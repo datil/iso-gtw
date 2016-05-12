@@ -17,7 +17,8 @@
                  [org.slf4j/jcl-over-slf4j "1.7.12"]
                  [org.slf4j/log4j-over-slf4j "1.7.12"]
 
-                 [org.jreactive/netty-iso8583 "0.1.3-SNAPSHOT"]]
+                 [org.jreactive/netty-iso8583 "0.1.3-SNAPSHOT"]
+                 [byte-streams "0.2.2"]]
   :min-lein-version "2.0.0"
   :resource-paths ["config", "resources"]
   :profiles {:dev {:aliases {"run-dev" ["trampoline" "run" "-m" "iso-gtw.server/run-dev"]}
