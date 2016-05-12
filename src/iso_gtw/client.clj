@@ -18,21 +18,19 @@
 ;; Handlers
 (def mti-0810 (reify IsoMessageListener
                 (applies [this iso-msg]
-                  ;;(= (.getType iso-msg) 0x810)
-                  (println (.debugString iso-msg))
-                  true)
+                  (= (.getType iso-msg) 0x810))
                 (onMessage [this ctx iso-msg]
-                  (println "server response code: "
+                  (println "810 received: "
                            (.debugString iso-msg))
-                  true)))
+                  false)))
 
 (def mti-0210 (reify IsoMessageListener
                 (applies [this iso-msg]
-                  (println (.debugString iso-msg))
-                  true)
+                  (= (.getType iso-gtw) 0x210))
                 (onMessage [this ctx iso-msg]
-                  (println "server response"
-                           (.debugString iso-msg)))))
+                  (println "210 received: "
+                           (.debugString iso-msg))
+                  false)))
 
 (.addMessageListener client mti-0810)
 (.addMessageListener client mti-0210)
