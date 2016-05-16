@@ -90,6 +90,8 @@
         <field num="33" type="LLBIN"/>
         <!-- reference number -->
         <field num="37" type="BINARY" length="12"/>
+        <!-- response code -->
+        <field num="39" type="BINARY" length="2"/>
         <!-- card acceptor terminal id -->
         <field num="41" type="BINARY" length="8"/>
         <!-- card acceptor identification code -->
