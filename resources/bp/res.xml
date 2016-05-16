@@ -67,44 +67,48 @@
     <!-- response -->
     <parse type="0210">
         <!-- PAN -->
-        <field num="2" type="NUMERIC" length="16"/>
+        <field num="2" type="LLBIN"/>
         <!-- processing code -->
-        <field num="3" type="NUMERIC" length="6"/>
+        <field num="3" type="BINARY" length="6"/>
         <!-- amount -->
-        <field num="4" type="AMOUNT"/>
+        <field num="4" type="BINARY" length="12"/>
         <!-- transmission datetime -->
-        <field num="7" type="DATE10"/>
+        <field num="7" type="BINARY" length="10"/>
         <!-- systems trace audit number -->
-        <field num="11" type="NUMERIC" length="6"/>
+        <field num="11" type="BINARY" length="6"/>
+        <!-- transaction local time -->
+        <field num="12" type="BINARY" length="6"/>
+        <!-- transaction local date -->
+        <field num="13" type="BINARY" length="4"/>
         <!-- settlement date -->
-        <field num="15" type="DATE4"/>
+        <field num="15" type="BINARY" length="4"/>
         <!-- mcc -->
-        <field num="18" type="NUMERIC" length="4"/>
+        <field num="18" type="BINARY" length="4"/>
         <!-- acquiring institution identification code -->
-        <field num="32" type="LLVAR"/>
+        <field num="32" type="LLBIN"/>
         <!--forwarding institution identification code -->
-        <field num="33" type="LLVAR"/>
+        <field num="33" type="LLBIN"/>
         <!-- reference number -->
-        <field num="37" type="ALPHA" length="12"/>
-        <!-- authorization identification response -->
-        <field num="38" type="ALPHA" length="6"/>
-        <!-- response code -->
-        <field num="39" type="ALPHA" length="2"/>
+        <field num="37" type="BINARY" length="12"/>
         <!-- card acceptor terminal id -->
-        <field num="41" type="ALPHA" length="16"/>
+        <field num="41" type="BINARY" length="8"/>
         <!-- card acceptor identification code -->
-        <field num="42" type="ALPHA" length="15"/>
+        <field num="42" type="BINARY" length="15"/>
         <!-- card acceptor name and location -->
         <!-- (1-23 address 24-36 city 37-38 state 39-40 country) -->
-        <field num="43" type="ALPHA" length="40"/>
+        <field num="43" type="BINARY" length="40"/>
         <!-- additional customized data -->
-        <field num="48" type="LLLVAR"/>
+        <field num="48" type="LLLBIN"/>
         <!-- currency -->
-        <field num="49" type="NUMERIC" length="3"/>
+        <field num="49" type="BINARY" length="3"/>
         <!-- national product information -->
-        <field num="57" type="LLLVAR"/>
+        <field num="57" type="LLLBIN"/>
+        <!-- national product information -->
+        <field num="58" type="LLLBIN"/>
+        <!-- device data -->
+        <field num="61" type="LLLBIN"/>
         <!-- network data -->
-        <field num="63" type="LLLVAR"/>
+        <field num="63" type="LLLBIN"/>
     </parse>
 
     <!-- authorization advice -->
