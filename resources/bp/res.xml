@@ -85,9 +85,9 @@
         <!-- mcc -->
         <field num="18" type="BINARY" length="4"/>
         <!-- acquiring institution identification code -->
-        <field num="32" type="LLBIN"/>
+        <field num="32" type="BINARY" length="11"/>
         <!--forwarding institution identification code -->
-        <field num="33" type="LLBIN"/>
+        <field num="33" type="BINARY" length="11"/>
         <!-- reference number -->
         <field num="37" type="BINARY" length="12"/>
         <!-- response code -->
