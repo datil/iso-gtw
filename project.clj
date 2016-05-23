@@ -1,4 +1,4 @@
-(defproject iso-gtw "0.0.1-SNAPSHOT"
+(defproject iso-gtw "0.1.0"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
@@ -17,8 +17,10 @@
                  [org.slf4j/jcl-over-slf4j "1.7.12"]
                  [org.slf4j/log4j-over-slf4j "1.7.12"]
 
+                 [org.clojure/core.async "0.2.374"]
                  [org.jreactive/netty-iso8583 "0.1.3-SNAPSHOT"]
-                 [byte-streams "0.2.2"]]
+                 [byte-streams "0.2.2"]
+                 [org.immutant/messaging "2.1.4"]]
   :min-lein-version "2.0.0"
   :resource-paths ["config", "resources"]
   :profiles {:dev {:aliases {"run-dev" ["trampoline" "run" "-m" "iso-gtw.server/run-dev"]}
