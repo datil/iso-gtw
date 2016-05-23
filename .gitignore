@@ -2,3 +2,5 @@ target/
 tmp/
 logs/
 resources/
+hornetq-data/
+/resources/bp/res.xml
