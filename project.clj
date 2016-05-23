@@ -17,6 +17,7 @@
                  [org.slf4j/jcl-over-slf4j "1.7.12"]
                  [org.slf4j/log4j-over-slf4j "1.7.12"]
 
+                 [environ "1.0.3"]
                  [org.clojure/core.async "0.2.374"]
                  [org.jreactive/netty-iso8583 "0.1.3-SNAPSHOT"]
                  [byte-streams "0.2.2"]
