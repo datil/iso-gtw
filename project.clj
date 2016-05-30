@@ -24,7 +24,7 @@
                  [org.immutant/messaging "2.1.4"]]
   :min-lein-version "2.0.0"
   :resource-paths ["config", "resources"]
-  :profiles {:dev {:aliases {"run-dev" ["trampoline" "run" "-m" "iso-gtw.server/run-dev"]}
+  :profiles {:dev {:aliases {"run-dev" ["trampoline" "run" "-m" "iso-gtw.rest-service.server/run-dev"]}
                    :dependencies [[io.pedestal/pedestal.service-tools "0.4.1"]]}
              :uberjar {:aot [iso-gtw.rest-service.server]}}
   :main ^{:skip-aot true} iso-gtw.rest-service.server)
