@@ -4,3 +4,4 @@ logs/
 resources/
 hornetq-data/
 /resources/bp/res.xml
+.lein-repl-history
