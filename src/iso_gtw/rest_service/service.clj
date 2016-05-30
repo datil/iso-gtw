@@ -1,9 +1,22 @@
 (ns iso-gtw.rest-service.service
-  (:require [io.pedestal.http :as bootstrap]
+  (:require [clojure.core.async :as async :refer :all]
+            [io.pedestal.http :as bootstrap]
             [io.pedestal.http.route :as route]
             [io.pedestal.http.body-params :as body-params]
             [io.pedestal.http.route.definition :refer [defroutes]]
-            [ring.util.response :as ring-resp]))
+            [io.pedestal.interceptor.helpers :as interceptor]
+            [iso-gtw.client :as iso]
+            [ring.util.response :as ring-resp]
+            [iso-gtw.rest-service.responses :as resp]
+            [immutant.messaging :as m]
+            [iso-gtw.queue :as q]))
+
+(def assoc-iso-client
+  (interceptor/before
+   ::assoc-db
+   (fn
+     [context]
+     (assoc-in context [:request :iso-client] (:mock iso/clients)))))
 
 (defn about-page
   [request]
@@ -15,13 +28,59 @@
   [request]
   (ring-resp/response "Hello World!"))
 
+(defn get-field
+  [fields field]
+  (first (filter #(and (= (compare (% :field) field) 0)) fields)))
+
+(interceptor/defbefore message
+  [context]
+  (let [channel (chan)]
+    (go
+      (let [request (:request context)
+            incoming (:json-params request)
+            iso-client (:iso-client request)
+            factory (iso/msg-factory "bp/res.xml")
+            stan (:value (get-field (:fields incoming) 11))
+            msg (iso/iso-msg factory incoming)
+            sent (iso/send-msg (:client iso-client) msg)
+            rec-msg (m/receive q/resp-queue :selector (str "stan = '" stan "'"))
+            response (assoc context :response (resp/ok rec-msg))]
+        (>! channel response)))
+    channel))
+
+(defn start-client
+  [request]
+  (let [iso-client (:iso-client request)]
+    (println "starting...")
+    (future
+      (iso/connect (:client iso-client) (:host iso-client) (:port iso-client)))
+    (resp/ok {:message "Client started."})))
+
+(defn shutdown-client
+  [request]
+  (let [iso-client (:iso-client request)]
+    (iso/shutdown (:client iso-client))
+    (resp/ok {:message "Client stopped."})))
+
+(defn client-status
+  [request]
+  (let [iso-client (:iso-client request)]
+    (resp/ok {:connected (iso/is-connected? (:client iso-client))})))
+
 (defroutes routes
   ;; Defines "/" and "/about" routes with their associated :get handlers.
   ;; The interceptors defined after the verb map (e.g., {:get home-page}
   ;; apply to / and its children (/about).
   [[["/" {:get home-page}
-     ^:interceptors [(body-params/body-params) bootstrap/html-body]
-     ["/about" {:get about-page}]]]])
+     ^:interceptors [(body-params/body-params)
+                     bootstrap/json-body
+                     assoc-iso-client]
+     ["/about" {:get about-page}]
+     ["/client"
+      ["/status" {:get client-status}]
+      ["/start" {:post start-client}]
+      ["/shutdown" {:post shutdown-client}]]
+     ["/message" {:post message}]]]])
 
 ;; Consumed by iso-gtw.server/create-server
 ;; See bootstrap/default-interceptors for additional options you can configure
