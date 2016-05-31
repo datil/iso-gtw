@@ -23,12 +23,20 @@
                 (applies [this iso-msg]
                   (= (.getType iso-msg) 0x210))
                 (onMessage [this ctx iso-msg]
-                  (m/publish queue/resp-queue
-                             {:stan (.toString (.getField iso-msg 11))
-                              :response-code (.toString (.getField iso-msg 39))
-                              :authorization (.toString (.getField iso-msg 38))
-                              :network-data (.toString (.getField iso-msg 63))}
-                             :properties {:stan (.toString (.getField iso-msg 11))})
+                  (let [resp-code (.toString (.getField iso-msg 39))]
+                    (if (= resp-code "00")
+                      (m/publish queue/resp-queue
+                                 {:stan (.toString (.getField iso-msg 11))
+                                  :response-code (.toString (.getField iso-msg 39))
+                                  :authorization (.toString (.getField iso-msg 38))
+                                  :network-data (.toString (.getField iso-msg 63))}
+                                 :properties {:stan (.toString (.getField iso-msg 11))})
+                      (m/publish queue/resp-queue
+                                 {:stan (.toString (.getField iso-msg 11))
+                                  :response-code (.toString (.getField iso-msg 39))
+                                  :authorization ""
+                                  :network-data (.toString (.getField iso-msg 63))}
+                                 :properties {:stan (.toString (.getField iso-msg 11))})))
                   false)))
 
 (defn client
