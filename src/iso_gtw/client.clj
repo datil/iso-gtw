@@ -24,7 +24,10 @@
                   (= (.getType iso-msg) 0x210))
                 (onMessage [this ctx iso-msg]
                   (m/publish queue/resp-queue
-                             {:stan (.toString (.getField iso-msg 11))}
+                             {:stan (.toString (.getField iso-msg 11))
+                              :response-code (.toString (.getField iso-msg 39))
+                              :authorization (.toString (.getField iso-msg 38))
+                              :network-data (.toString (.getField iso-msg 63))}
                              :properties {:stan (.toString (.getField iso-msg 11))})
                   false)))
 
