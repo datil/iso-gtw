@@ -29,5 +29,6 @@
                  :port 9999}
   :profiles {:dev {:aliases {"run-dev" ["trampoline" "run" "-m" "iso-gtw.rest-service.server/run-dev"]}
                    :dependencies [[io.pedestal/pedestal.service-tools "0.4.1"]]}
-             :uberjar {:aot [iso-gtw.rest-service.server]}}
+             :uberjar {:aot [iso-gtw.rest-service.server]}
+             :repl {:plugins [[cider/cider-nrepl "0.14.0-SNAPSHOT"]]}}
   :main ^{:skip-aot true} iso-gtw.rest-service.server)
