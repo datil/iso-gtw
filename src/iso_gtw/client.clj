@@ -53,7 +53,7 @@
                          :port (:port (:mock config/hosts))}})
 
 (defn iso-msg
-  [msg-factory msg]
+  [msg-factory msg stan]
   (let [iso-msg (.newMessage msg-factory 0x200)]
     (if (:fields msg)
       (do
@@ -67,6 +67,8 @@
             (.setField iso-msg
                        (:field field)
                        (.value (IsoType/valueOf (:type field)) (:value field)))))
+        (.setField iso-msg 11 (.value IsoType/ALPHA stan 6))
+	(println (.debugString iso-msg))
         iso-msg)
       iso-msg)))
 

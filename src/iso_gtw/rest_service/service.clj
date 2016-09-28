@@ -32,6 +32,14 @@
   [fields field]
   (first (filter #(and (= (compare (% :field) field) 0)) fields)))
 
+(defn new-stan
+  "System trace audit number."
+  []
+  (loop [s (str (rand-int 999999))]
+    (if (< (.length s) 6)
+      (recur (str "0" s))
+      s)))
+
 (def message
   (interceptor/before
    (fn [context]
@@ -41,8 +49,9 @@
                incoming (:json-params request)
                iso-client (:iso-client request)
                factory (iso/msg-factory "bp/res.xml")
-               stan (:value (get-field (:fields incoming) 11))
-               msg (iso/iso-msg factory incoming)
+               ;;stan (:value (get-field (:fields incoming) 11))
+               stan (new-stan)
+               msg (iso/iso-msg factory incoming stan)
                sent (iso/send-msg (:client iso-client) msg)
                rec-msg (m/receive q/resp-queue :selector (str "stan = '" stan "'"))
                response (assoc context :response (resp/ok rec-msg))]
