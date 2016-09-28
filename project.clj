@@ -25,6 +25,7 @@
   :min-lein-version "2.0.0"
   :resource-paths ["config", "resources"]
   :repl-options {:welcome (println "Welcome Master!")
+                 :host "0.0.0.0"
                  :port 9999}
   :profiles {:dev {:aliases {"run-dev" ["trampoline" "run" "-m" "iso-gtw.rest-service.server/run-dev"]}
                    :dependencies [[io.pedestal/pedestal.service-tools "0.4.1"]]}
