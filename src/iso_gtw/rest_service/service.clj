@@ -32,21 +32,22 @@
   [fields field]
   (first (filter #(and (= (compare (% :field) field) 0)) fields)))
 
-(interceptor/defbefore message
-  [context]
-  (let [channel (chan)]
-    (go
-      (let [request (:request context)
-            incoming (:json-params request)
-            iso-client (:iso-client request)
-            factory (iso/msg-factory "bp/res.xml")
-            stan (:value (get-field (:fields incoming) 11))
-            msg (iso/iso-msg factory incoming)
-            sent (iso/send-msg (:client iso-client) msg)
-            rec-msg (m/receive q/resp-queue :selector (str "stan = '" stan "'"))
-            response (assoc context :response (resp/ok rec-msg))]
-        (>! channel response)))
-    channel))
+(def message
+  (interceptor/before
+   (fn [context]
+     (let [channel (chan)]
+       (go
+         (let [request (:request context)
+               incoming (:json-params request)
+               iso-client (:iso-client request)
+               factory (iso/msg-factory "bp/res.xml")
+               stan (:value (get-field (:fields incoming) 11))
+               msg (iso/iso-msg factory incoming)
+               sent (iso/send-msg (:client iso-client) msg)
+               rec-msg (m/receive q/resp-queue :selector (str "stan = '" stan "'"))
+               response (assoc context :response (resp/ok rec-msg))]
+           (>! channel response)))
+       channel))))
 
 (defn start-client
   [request]
